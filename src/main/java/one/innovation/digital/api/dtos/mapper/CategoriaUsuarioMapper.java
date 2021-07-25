@@ -7,9 +7,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.com.apssystem.bookstore.api.dtos.entity.CategoriaEntity;
-import br.com.apssystem.bookstore.api.dtos.input.CategoriaInput;
-import br.com.apssystem.bookstore.domain.entity.Categoria;
+import one.innovation.digital.api.dtos.entity.CategoriaUsuarioEntity;
+import one.innovation.digital.api.dtos.input.CategoriaUsuarioInput;
+import one.innovation.digital.domain.entity.CategoriaUsuario;
 
 @Component
 public class CategoriaUsuarioMapper {
@@ -17,19 +17,19 @@ public class CategoriaUsuarioMapper {
 	@Autowired
 	private ModelMapper modelMapper;
 
-	public CategoriaEntity toEntity(Categoria obj) {
-		return modelMapper.map(obj, CategoriaEntity.class);
+	public CategoriaUsuarioEntity toEntity(CategoriaUsuario obj) {
+		return modelMapper.map(obj, CategoriaUsuarioEntity.class);
 	}
 
-	public List<CategoriaEntity> toCollectionEntity(List<Categoria> objs) {
+	public List<CategoriaUsuarioEntity> toCollectionEntity(List<CategoriaUsuario> objs) {
 		return objs.stream().map(obj -> toEntity(obj)).collect(Collectors.toList());
 	}
 
-	public Categoria toDomain(CategoriaUsuarioIdInput input) {
-		return modelMapper.map(input, Categoria.class);
+	public CategoriaUsuario toDomain(CategoriaUsuarioInput input) {
+		return modelMapper.map(input, CategoriaUsuario.class);
 	}
 
-	public void copyToDomainObject(CategoriaUsuarioIdInput input, Categoria obj) {
+	public void copyToDomainObject(CategoriaUsuarioInput input, CategoriaUsuario obj) {
 		modelMapper.map(input, obj);
 	}
 
