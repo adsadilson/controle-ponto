@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 import one.innovation.digital.api.dtos.entity.CategoriaUsuarioEntity;
 import one.innovation.digital.api.dtos.input.CategoriaUsuarioInput;
@@ -23,8 +24,9 @@ import one.innovation.digital.api.dtos.mapper.CategoriaUsuarioMapper;
 import one.innovation.digital.domain.entity.CategoriaUsuario;
 import one.innovation.digital.domain.service.CategoriaUsuarioService;
 
+@Api(tags = "Categoria de Usuário")
 @RestController
-@RequestMapping("/categorias")
+@RequestMapping("/categoria-usuario")
 @AllArgsConstructor
 public class CategoriaUsuarioResource {
 
