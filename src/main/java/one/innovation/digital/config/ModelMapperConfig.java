@@ -1,4 +1,4 @@
-package one.innovation.digital.api.dtos.mapper;
+package one.innovation.digital.config;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

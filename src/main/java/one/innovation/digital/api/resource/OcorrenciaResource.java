@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import one.innovation.digital.api.dtos.entity.OcorrenciaEntity;
 import one.innovation.digital.api.dtos.input.OcorrenciaInput;
@@ -33,18 +34,21 @@ public class OcorrenciaResource {
 	private OcorrenciaService ocorrenciaService;
 	private OcorrenciaMapper mapper;
 
+	@ApiOperation("Pesquisar uma ocorrencia por ID")
 	@GetMapping("/{id}")
 	public ResponseEntity<OcorrenciaEntity> buscarPorId(@PathVariable Long id) {
 		Ocorrencia obj = ocorrenciaService.buscarPorId(id);
 		return ResponseEntity.ok(mapper.toEntity(obj));
 	}
 
+	@ApiOperation("Pesquisar todas as ocorrencias")
 	@GetMapping
 	public ResponseEntity<List<OcorrenciaEntity>> listarTodos() {
 		List<OcorrenciaEntity> lists = mapper.toCollectionEntity(ocorrenciaService.listarTodos());
 		return ResponseEntity.ok(lists);
 	}
 
+	@ApiOperation("Cadastra uma ocorrencia")
 	@PostMapping
 	public ResponseEntity<OcorrenciaEntity> adicionar(@Valid @RequestBody OcorrenciaInput obj) {
 		Ocorrencia objNovo = ocorrenciaService.adicionar(mapper.toDomain(obj));
@@ -53,6 +57,7 @@ public class OcorrenciaResource {
 		return ResponseEntity.created(uri).body(mapper.toEntity(objNovo));
 	}
 
+	@ApiOperation("Atualizar uma ocorrencia")
 	@PutMapping("/{id}")
 	public ResponseEntity<OcorrenciaEntity> atualizar(@RequestBody OcorrenciaInput input,
 			@PathVariable Long id) {
@@ -61,6 +66,7 @@ public class OcorrenciaResource {
 		return ResponseEntity.ok().body(mapper.toEntity(obj));
 	}
 
+	@ApiOperation("Excluir uma ocorrencia")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> excluir(@PathVariable Long id) {
 		ocorrenciaService.excluir(id);

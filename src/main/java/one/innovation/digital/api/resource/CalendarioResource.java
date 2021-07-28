@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import one.innovation.digital.api.dtos.entity.CalendarioEntity;
 import one.innovation.digital.api.dtos.input.CalendarioInput;
@@ -33,18 +34,21 @@ public class CalendarioResource {
 	private CalendarioService calendarioService;
 	private CalendarioMapper mapper;
 
+	@ApiOperation("Pesquisar um calendario por ID")
 	@GetMapping("/{id}")
 	public ResponseEntity<CalendarioEntity> buscarPorId(@PathVariable Long id) {
 		Calendario obj = calendarioService.buscarPorId(id);
 		return ResponseEntity.ok(mapper.toEntity(obj));
 	}
 
+	@ApiOperation("Pesquisar todos os calendarios")
 	@GetMapping
 	public ResponseEntity<List<CalendarioEntity>> listarTodos() {
 		List<CalendarioEntity> lists = mapper.toCollectionEntity(calendarioService.listarTodos());
 		return ResponseEntity.ok(lists);
 	}
 
+	@ApiOperation("Cadastra um calendario")
 	@PostMapping
 	public ResponseEntity<CalendarioEntity> adicionar(@Valid @RequestBody CalendarioInput obj) {
 		Calendario objNovo = calendarioService.adicionar(mapper.toDomain(obj));
@@ -53,6 +57,7 @@ public class CalendarioResource {
 		return ResponseEntity.created(uri).body(mapper.toEntity(objNovo));
 	}
 
+	@ApiOperation("Atualizar um calendario")
 	@PutMapping("/{id}")
 	public ResponseEntity<CalendarioEntity> atualizar(@RequestBody CalendarioInput input,
 			@PathVariable Long id) {
@@ -61,6 +66,7 @@ public class CalendarioResource {
 		return ResponseEntity.ok().body(mapper.toEntity(obj));
 	}
 
+	@ApiOperation("Excluir um calendario")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> excluir(@PathVariable Long id) {
 		calendarioService.excluir(id);

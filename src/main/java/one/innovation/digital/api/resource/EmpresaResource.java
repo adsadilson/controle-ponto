@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import one.innovation.digital.api.dtos.entity.EmpresaEntity;
 import one.innovation.digital.api.dtos.input.EmpresaInput;
@@ -33,18 +34,21 @@ public class EmpresaResource {
 	private EmpresaService empresaService;
 	private EmpresaMapper mapper;
 
+	@ApiOperation("Pesquisar uma empresa por ID")
 	@GetMapping("/{id}")
 	public ResponseEntity<EmpresaEntity> buscarPorId(@PathVariable Long id) {
 		Empresa obj = empresaService.buscarPorId(id);
 		return ResponseEntity.ok(mapper.toEntity(obj));
 	}
 
+	@ApiOperation("Pesquisar todas as empresas")
 	@GetMapping
 	public ResponseEntity<List<EmpresaEntity>> listarTodos() {
 		List<EmpresaEntity> lists = mapper.toCollectionEntity(empresaService.listarTodos());
 		return ResponseEntity.ok(lists);
 	}
 
+	@ApiOperation("Cadastra uma empresa")
 	@PostMapping
 	public ResponseEntity<EmpresaEntity> adicionar(@Valid @RequestBody EmpresaInput obj) {
 		Empresa objNovo = empresaService.adicionar(mapper.toDomain(obj));
@@ -53,6 +57,7 @@ public class EmpresaResource {
 		return ResponseEntity.created(uri).body(mapper.toEntity(objNovo));
 	}
 
+	@ApiOperation("Atualizar uma empresa")
 	@PutMapping("/{id}")
 	public ResponseEntity<EmpresaEntity> atualizar(@RequestBody EmpresaInput input,
 			@PathVariable Long id) {
@@ -61,6 +66,7 @@ public class EmpresaResource {
 		return ResponseEntity.ok().body(mapper.toEntity(obj));
 	}
 
+	@ApiOperation("Excluir uma empresa")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> excluir(@PathVariable Long id) {
 		empresaService.excluir(id);

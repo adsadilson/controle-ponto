@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import one.innovation.digital.api.dtos.entity.CategoriaUsuarioEntity;
 import one.innovation.digital.api.dtos.input.CategoriaUsuarioInput;
@@ -33,18 +34,21 @@ public class CategoriaUsuarioResource {
 	private CategoriaUsuarioService categoriaUsuarioService;
 	private CategoriaUsuarioMapper mapper;
 
+	@ApiOperation("Pesquisar categoraia por ID")
 	@GetMapping("/{id}")
 	public ResponseEntity<CategoriaUsuarioEntity> buscarPorId(@PathVariable Long id) {
 		CategoriaUsuario obj = categoriaUsuarioService.buscarPorId(id);
 		return ResponseEntity.ok(mapper.toEntity(obj));
 	}
 
+	@ApiOperation("Pesquisar todas categorias")
 	@GetMapping
 	public ResponseEntity<List<CategoriaUsuarioEntity>> listarTodos() {
 		List<CategoriaUsuarioEntity> lists = mapper.toCollectionEntity(categoriaUsuarioService.listarTodos());
 		return ResponseEntity.ok(lists);
 	}
 
+	@ApiOperation("Cadastra uma categoria")
 	@PostMapping
 	public ResponseEntity<CategoriaUsuarioEntity> adicionar(@Valid @RequestBody CategoriaUsuarioInput obj) {
 		CategoriaUsuario objNovo = categoriaUsuarioService.adicionar(mapper.toDomain(obj));
@@ -53,6 +57,7 @@ public class CategoriaUsuarioResource {
 		return ResponseEntity.created(uri).body(mapper.toEntity(objNovo));
 	}
 
+	@ApiOperation("Atualizar uma categoria")
 	@PutMapping("/{id}")
 	public ResponseEntity<CategoriaUsuarioEntity> atualizar(@RequestBody CategoriaUsuarioInput input,
 			@PathVariable Long id) {
@@ -61,6 +66,7 @@ public class CategoriaUsuarioResource {
 		return ResponseEntity.ok().body(mapper.toEntity(obj));
 	}
 
+	@ApiOperation("Excluir uma categoria")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> excluir(@PathVariable Long id) {
 		categoriaUsuarioService.excluir(id);

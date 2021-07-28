@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import one.innovation.digital.api.dtos.entity.NivelAcessoEntity;
 import one.innovation.digital.api.dtos.input.NivelAcessoInput;
@@ -23,6 +25,7 @@ import one.innovation.digital.api.dtos.mapper.NivelAcessoMapper;
 import one.innovation.digital.domain.entity.NivelAcesso;
 import one.innovation.digital.domain.service.NivelAcessoService;
 
+@Api(tags = "Nivél de acesso")
 @RestController
 @RequestMapping("/nivel-acesso")
 @AllArgsConstructor
@@ -31,18 +34,21 @@ public class NivelAcessoResource {
 	private NivelAcessoService nivelAcessoService;
 	private NivelAcessoMapper mapper;
 
+	@ApiOperation("Pesquisar um nivél de acesso por ID")
 	@GetMapping("/{id}")
 	public ResponseEntity<NivelAcessoEntity> buscarPorId(@PathVariable Long id) {
 		NivelAcesso obj = nivelAcessoService.buscarPorId(id);
 		return ResponseEntity.ok(mapper.toEntity(obj));
 	}
 
+	@ApiOperation("Pesquisar todos nivél de acesso")
 	@GetMapping
 	public ResponseEntity<List<NivelAcessoEntity>> listarTodos() {
 		List<NivelAcessoEntity> lists = mapper.toCollectionEntity(nivelAcessoService.listarTodos());
 		return ResponseEntity.ok(lists);
 	}
 
+	@ApiOperation("Cadastra um nivél de acesso")
 	@PostMapping
 	public ResponseEntity<NivelAcessoEntity> adicionar(@Valid @RequestBody NivelAcessoInput obj) {
 		NivelAcesso objNovo = nivelAcessoService.adicionar(mapper.toDomain(obj));
@@ -51,6 +57,7 @@ public class NivelAcessoResource {
 		return ResponseEntity.created(uri).body(mapper.toEntity(objNovo));
 	}
 
+	@ApiOperation("Atualizar um nivél de acesso")
 	@PutMapping("/{id}")
 	public ResponseEntity<NivelAcessoEntity> atualizar(@RequestBody NivelAcessoInput input,
 			@PathVariable Long id) {
@@ -59,6 +66,7 @@ public class NivelAcessoResource {
 		return ResponseEntity.ok().body(mapper.toEntity(obj));
 	}
 
+	@ApiOperation("Excluir um nivél de acesso")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> excluir(@PathVariable Long id) {
 		nivelAcessoService.excluir(id);

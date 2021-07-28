@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import one.innovation.digital.api.dtos.entity.UsuarioEntity;
 import one.innovation.digital.api.dtos.input.UsuarioInput;
@@ -24,7 +25,7 @@ import one.innovation.digital.api.dtos.mapper.UsuarioMapper;
 import one.innovation.digital.domain.entity.Usuario;
 import one.innovation.digital.domain.service.UsuarioService;
 
-@Api(tags = "Usuario")
+@Api(tags = "Usuário")
 @RestController
 @RequestMapping("/usuarios")
 @AllArgsConstructor
@@ -33,18 +34,21 @@ public class UsuarioResource {
 	private UsuarioService usuarioService;
 	private UsuarioMapper mapper;
 
+	@ApiOperation("Pesquisar um usuário por ID")
 	@GetMapping("/{id}")
 	public ResponseEntity<UsuarioEntity> buscarPorId(@PathVariable Long id) {
 		Usuario obj = usuarioService.buscarPorId(id);
 		return ResponseEntity.ok(mapper.toEntity(obj));
 	}
 
+	@ApiOperation("Pesquisar todos os usuários")
 	@GetMapping
 	public ResponseEntity<List<UsuarioEntity>> listarTodos() {
 		List<UsuarioEntity> lists = mapper.toCollectionEntity(usuarioService.listarTodos());
 		return ResponseEntity.ok(lists);
 	}
 
+	@ApiOperation("Cadastra um Usuário")
 	@PostMapping
 	public ResponseEntity<UsuarioEntity> adicionar(@Valid @RequestBody UsuarioInput obj) {
 		Usuario objNovo = usuarioService.adicionar(mapper.toDomain(obj));
@@ -53,6 +57,7 @@ public class UsuarioResource {
 		return ResponseEntity.created(uri).body(mapper.toEntity(objNovo));
 	}
 
+	@ApiOperation("Atualizar um usuário")
 	@PutMapping("/{id}")
 	public ResponseEntity<UsuarioEntity> atualizar(@RequestBody UsuarioInput input, @PathVariable Long id) {
 		Usuario obj = usuarioService.buscarPorId(id);
@@ -60,6 +65,7 @@ public class UsuarioResource {
 		return ResponseEntity.ok().body(mapper.toEntity(obj));
 	}
 
+	@ApiOperation("Excluir um Usuário")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> excluir(@PathVariable Long id) {
 		usuarioService.excluir(id);

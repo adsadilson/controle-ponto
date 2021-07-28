@@ -20,7 +20,6 @@ public class SpringFoxConfig implements WebMvcConfigurer{
 	
 	// @formatter:off
  
-
 	@Bean
 	public Docket apiDocket() {
 		return new Docket(DocumentationType.SWAGGER_2)
@@ -28,7 +27,15 @@ public class SpringFoxConfig implements WebMvcConfigurer{
 				.apis(RequestHandlerSelectors.basePackage("one.innovation.digital.api"))
 				.build()
 				.apiInfo(apiInfo())
-				.tags(new Tag("Categoria de Usuário", "Gerencia as categoria do Usuário"));
+				.tags(new Tag("Categoria de Usuário", "Gerencia as categoria do Usuário"))
+				.tags(new Tag("Movimentação", "Gerencia movimentações"))
+				.tags(new Tag("Jornda de trabalho", "Gerencia Jornda de trabalho"))
+				.tags(new Tag("Banco de Horas", "Gerencia Banco de Horas"))
+				.tags(new Tag("Calendario", "Gerencia Calendarios"))
+				.tags(new Tag("Ocorrencia", "Gerencia Ocorrencias"))
+				.tags(new Tag("Localidade", "Gerencia Localidades"))
+				.tags(new Tag("Nivél de acesso", "Gerencia Nivél de acesso"))
+				.tags(new Tag("Tipo de data", "Gerencia Tipo de data"));
 	}
 	
 	public ApiInfo apiInfo() {
