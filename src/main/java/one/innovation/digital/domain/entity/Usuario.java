@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -37,7 +38,7 @@ public class Usuario {
 
 	@NotNull
 	@ManyToOne
-	@Column(nullable = false)
+	@JoinColumn(nullable = false)
 	private CategoriaUsuario categoriaUsuario;
 
 	@NotBlank
@@ -45,15 +46,15 @@ public class Usuario {
 	private String nome;
 
 	@ManyToOne
-	@Column(nullable = false)
+	@JoinColumn(nullable = false)
 	private Empresa  empresa;
 
 	@ManyToOne
-	@Column(nullable = false)
+	@JoinColumn(nullable = false)
 	private NivelAcesso nivelAcesso;
 
 	@ManyToOne
-	@Column(nullable = false)
+	@JoinColumn(nullable = false)
 	private JornadaTrabalho jornadaTrabalho;
 
 	@Column(precision = 12, scale = 2)
