@@ -5,10 +5,13 @@ import java.util.Arrays;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
+import one.innovation.digital.api.dtos.mapper.JornadaTrabalhoMapper;
 import one.innovation.digital.domain.entity.CategoriaUsuario;
+import one.innovation.digital.domain.entity.JornadaTrabalho;
 import one.innovation.digital.domain.entity.NivelAcesso;
 import one.innovation.digital.domain.entity.Ocorrencia;
 import one.innovation.digital.domain.repository.CategoriaUsuarioRepository;
+import one.innovation.digital.domain.repository.JornadaTrabalhoRepository;
 import one.innovation.digital.domain.repository.NivelAcessoRepository;
 import one.innovation.digital.domain.repository.OcorrenciaRepository;
 
@@ -19,6 +22,7 @@ public class DBService {
 	private CategoriaUsuarioRepository catUsuarioRepository;
 	private OcorrenciaRepository ocorrenciaRepository;
 	private NivelAcessoRepository nivelAcessoRepository;
+	private JornadaTrabalhoRepository jornadaTrabalhoRepository;
 
 	// @formatter:off
 
@@ -26,6 +30,7 @@ public class DBService {
 		popularCatUsuario();
 		popularOcorrencia();
 		popularNivelAcesso();
+		popularJornadaTrabalho();
 	}
 	
 	private void popularCatUsuario() {
@@ -58,6 +63,14 @@ public class DBService {
 		NivelAcesso obj3 = new NivelAcesso(4L, "OPERADOR DE CAIXA");
 		NivelAcesso obj4 = new NivelAcesso(5L, "VENDEDOR(a)");
 		nivelAcessoRepository.saveAll(Arrays.asList(obj,obj1,obj2,obj3,obj4));
+	}
+	private void popularJornadaTrabalho() {
+		JornadaTrabalho obj = new JornadaTrabalho(1L, "Escala 5×1");
+		JornadaTrabalho obj1 = new JornadaTrabalho(2L, "Escala 5×2");
+		JornadaTrabalho obj2 = new JornadaTrabalho(3L, "Escala 4×2");
+		JornadaTrabalho obj3 = new JornadaTrabalho(4L, "Escala 6×1");
+		JornadaTrabalho obj4 = new JornadaTrabalho(5L, "Escala 12×36");
+		jornadaTrabalhoRepository.saveAll(Arrays.asList(obj,obj1,obj2,obj3,obj4));
 	}
 
 		// @formatter:on
