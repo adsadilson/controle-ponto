@@ -6,8 +6,10 @@ import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
 import one.innovation.digital.domain.entity.CategoriaUsuario;
+import one.innovation.digital.domain.entity.NivelAcesso;
 import one.innovation.digital.domain.entity.Ocorrencia;
 import one.innovation.digital.domain.repository.CategoriaUsuarioRepository;
+import one.innovation.digital.domain.repository.NivelAcessoRepository;
 import one.innovation.digital.domain.repository.OcorrenciaRepository;
 
 @Service
@@ -16,12 +18,14 @@ public class DBService {
 
 	private CategoriaUsuarioRepository catUsuarioRepository;
 	private OcorrenciaRepository ocorrenciaRepository;
+	private NivelAcessoRepository nivelAcessoRepository;
 
 	// @formatter:off
 
 	public void instanciaBaseDado() {
 		popularCatUsuario();
 		popularOcorrencia();
+		popularNivelAcesso();
 	}
 	
 	private void popularCatUsuario() {
@@ -45,6 +49,15 @@ public class DBService {
 		Ocorrencia oc8 = new Ocorrencia(9L, "PADRÃO", "FERIAS");
 		Ocorrencia oc9 = new Ocorrencia(10L,"PADRÃO", "FERIADO");
 		ocorrenciaRepository.saveAll(Arrays.asList(oc,oc1,oc2,oc3,oc4,oc5,oc6,oc7,oc8,oc9));
+	}
+	
+	private void popularNivelAcesso() {
+		NivelAcesso obj = new NivelAcesso(1L, "ADMINISTRADOR");
+		NivelAcesso obj1 = new NivelAcesso(2L, "CONFENRISTA");
+		NivelAcesso obj2 = new NivelAcesso(3L, "ESTOQUISTA");
+		NivelAcesso obj3 = new NivelAcesso(4L, "OPERADOR DE CAIXA");
+		NivelAcesso obj4 = new NivelAcesso(5L, "VENDEDOR(a)");
+		nivelAcessoRepository.saveAll(Arrays.asList(obj,obj1,obj2,obj3,obj4));
 	}
 
 		// @formatter:on
