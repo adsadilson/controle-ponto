@@ -5,7 +5,6 @@ import java.util.Arrays;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
-import one.innovation.digital.api.dtos.mapper.JornadaTrabalhoMapper;
 import one.innovation.digital.domain.entity.CategoriaUsuario;
 import one.innovation.digital.domain.entity.JornadaTrabalho;
 import one.innovation.digital.domain.entity.NivelAcesso;
