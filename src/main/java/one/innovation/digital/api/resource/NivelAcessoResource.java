@@ -63,6 +63,7 @@ public class NivelAcessoResource {
 			@PathVariable Long id) {
 		NivelAcesso obj = nivelAcessoService.buscarPorId(id);
 		mapper.copyToDomainObject(input, obj);
+		nivelAcessoService.atualizar(obj);
 		return ResponseEntity.ok().body(mapper.toEntity(obj));
 	}
 

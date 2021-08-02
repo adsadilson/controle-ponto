@@ -62,6 +62,7 @@ public class BancoHorasResource {
 	public ResponseEntity<BancoHorasEntity> atualizar(@RequestBody BancoHorasInput input, @PathVariable Long id) {
 		BancoHoras obj = bancoHorasService.buscarPorId(id);
 		mapper.copyToDomainObject(input, obj);
+		bancoHorasService.atualizar(obj);
 		return ResponseEntity.ok().body(mapper.toEntity(obj));
 	}
 

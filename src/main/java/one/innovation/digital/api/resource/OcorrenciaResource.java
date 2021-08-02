@@ -63,6 +63,7 @@ public class OcorrenciaResource {
 			@PathVariable Long id) {
 		Ocorrencia obj = ocorrenciaService.buscarPorId(id);
 		mapper.copyToDomainObject(input, obj);
+		ocorrenciaService.atualizar(obj);
 		return ResponseEntity.ok().body(mapper.toEntity(obj));
 	}
 

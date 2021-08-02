@@ -63,6 +63,7 @@ public class LocalidadeResource {
 			@PathVariable Long id) {
 		Localidade obj = localidadeService.buscarPorId(id);
 		mapper.copyToDomainObject(input, obj);
+		localidadeService.atualizar(obj);
 		return ResponseEntity.ok().body(mapper.toEntity(obj));
 	}
 

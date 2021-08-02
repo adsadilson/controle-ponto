@@ -63,6 +63,7 @@ public class CategoriaUsuarioResource {
 			@PathVariable Long id) {
 		CategoriaUsuario obj = categoriaUsuarioService.buscarPorId(id);
 		mapper.copyToDomainObject(input, obj);
+		categoriaUsuarioService.atualizar(obj);
 		return ResponseEntity.ok().body(mapper.toEntity(obj));
 	}
 

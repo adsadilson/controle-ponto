@@ -62,6 +62,7 @@ public class TipoDataResource {
 	public ResponseEntity<TipoDataEntity> atualizar(@RequestBody TipoDataInput input, @PathVariable Long id) {
 		TipoData obj = tipoDataService.buscarPorId(id);
 		mapper.copyToDomainObject(input, obj);
+		tipoDataService.atualizar(obj);
 		return ResponseEntity.ok().body(mapper.toEntity(obj));
 	}
 

@@ -63,6 +63,7 @@ public class EmpresaResource {
 			@PathVariable Long id) {
 		Empresa obj = empresaService.buscarPorId(id);
 		mapper.copyToDomainObject(input, obj);
+		empresaService.atualizar(obj);
 		return ResponseEntity.ok().body(mapper.toEntity(obj));
 	}
 

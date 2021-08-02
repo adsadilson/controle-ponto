@@ -63,6 +63,7 @@ public class CalendarioResource {
 			@PathVariable Long id) {
 		Calendario obj = calendarioService.buscarPorId(id);
 		mapper.copyToDomainObject(input, obj);
+		calendarioService.atualizar(obj);
 		return ResponseEntity.ok().body(mapper.toEntity(obj));
 	}
 

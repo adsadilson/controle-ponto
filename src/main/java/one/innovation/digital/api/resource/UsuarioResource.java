@@ -62,6 +62,7 @@ public class UsuarioResource {
 	public ResponseEntity<UsuarioEntity> atualizar(@RequestBody UsuarioInput input, @PathVariable Long id) {
 		Usuario obj = usuarioService.buscarPorId(id);
 		mapper.copyToDomainObject(input, obj);
+		usuarioService.atualizar(obj);
 		return ResponseEntity.ok().body(mapper.toEntity(obj));
 	}
 

@@ -63,6 +63,7 @@ public class MovimentacaoResource {
 			@PathVariable Long id) {
 		Movimentacao obj = movimentacaoService.buscarPorId(id);
 		mapper.copyToDomainObject(input, obj);
+		movimentacaoService.atualizar(obj);
 		return ResponseEntity.ok().body(mapper.toEntity(obj));
 	}
 

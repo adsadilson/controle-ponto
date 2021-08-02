@@ -63,6 +63,7 @@ public class JornadaTrabalhoResource {
 			@PathVariable Long id) {
 		JornadaTrabalho obj = jornadaTrabalhoService.buscarPorId(id);
 		mapper.copyToDomainObject(input, obj);
+		jornadaTrabalhoService.atualizar(obj);
 		return ResponseEntity.ok().body(mapper.toEntity(obj));
 	}
 
